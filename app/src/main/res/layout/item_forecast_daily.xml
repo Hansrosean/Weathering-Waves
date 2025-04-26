@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_item_forecast_daily"
+    android:layout_width="60dp"
+    android:layout_height="130dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    android:layout_gravity="center"
+    android:layout_marginStart="25dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_item_forecast_daily_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center|top"
+        android:gravity="center|top"
+        android:layout_marginTop="10dp"
+        android:text="00C"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/img_icon_forecast_daily_weather"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        tools:src="@tools:sample/backgrounds/scenic"/>
+
+    <TextView
+        android:id="@+id/tv_day_name_forecast_daily"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center|bottom"
+        android:gravity="center|bottom"
+        android:layout_marginBottom="10dp"
+        android:text="00.00"
+        android:textSize="15sp" />
+
+</androidx.cardview.widget.CardView>

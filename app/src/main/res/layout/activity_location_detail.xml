@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    tools:context=".ui.LocationDetailActivity">
+
+    <TextView
+        android:id="@+id/tv_city_name_daily_forecast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Jakarta" />
+
+    <TextView
+        android:id="@+id/tv_min_max_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_city_name_daily_forecast"
+        app:layout_constraintStart_toStartOf="@+id/tv_city_name_daily_forecast"
+        app:layout_constraintTop_toBottomOf="@id/tv_city_name_daily_forecast"
+        tools:text="Min:8 C     Max:20 C" />
+
+    <TextView
+        android:id="@+id/tv_7_days_forecast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="35dp"
+        android:text="7-Days Forecasts"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_min_max_temperature" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_7_day_forecasts"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="15dp"
+        android:clipToPadding="false"
+        android:paddingEnd="25dp"
+        android:scrollIndicators="start"
+        android:scrollbars="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_7_days_forecast"
+        tools:listitem="@layout/item_forecast_hourly" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_air_quality"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="25dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="@color/light_blue"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_7_day_forecasts">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="17dp"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/white"
+                android:text="Air Quality"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:drawableStartCompat="@drawable/baseline_accessibility_new_24" />
+
+            <TextView
+                android:id="@+id/tv_epa_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                tools:text="Low Health Risk" />
+
+            <View
+                android:layout_width="320dp"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@color/light_gray" />
+
+            <TextView
+                android:id="@+id/tv_air_quality_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="150dp"
+                android:drawableTint="@color/white"
+                android:text="See More"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:drawableEndCompat="@drawable/baseline_arrow_forward_ios_24" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="25dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="25dp"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:rowCount="1"
+        app:layout_constraintEnd_toEndOf="@id/cv_air_quality"
+        app:layout_constraintStart_toStartOf="@id/cv_air_quality"
+        app:layout_constraintTop_toBottomOf="@id/cv_air_quality">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_time_detail"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:backgroundTint="@color/green"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="15dp"
+                    android:drawablePadding="5dp"
+                    android:text="@string/sunrise"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    app:drawableStartCompat="@drawable/baseline_brightness_high_24"
+                    app:drawableTint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_sunrise_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="5dp"
+                    android:drawablePadding="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="05:00 AM" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="17dp"
+                    android:drawablePadding="5dp"
+                    android:text="@string/sunset"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    app:drawableStartCompat="@drawable/baseline_brightness_4_24"
+                    app:drawableTint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_sunset_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="5dp"
+                    android:drawablePadding="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="05:00 PM" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_uv_index"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/green"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="15dp"
+                    android:drawablePadding="5dp"
+                    android:text="@string/uv_index"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    app:drawableStartCompat="@drawable/baseline_brightness_1_24"
+                    app:drawableTint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_uv_index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="15dp"
+                    android:drawablePadding="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    tools:text="5" />
+
+                <TextView
+                    android:id="@+id/tv_uv_index_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="15dp"
+                    android:drawablePadding="5dp"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    tools:text="Moderate" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

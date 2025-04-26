@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Weathering Waves</string>
+    <string name="city_name">city_name</string>
+    <string name="current_date">current_date</string>
+    <string name="current_weather">current_weather</string>
+    <string name="current_temperature">current_temperature</string>
+    <string name="today">Today</string>
+    <string name="sunset">Sunset</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="uv_index">UV INDEX</string>
+    <string name="degrees_celcius">°C</string>
+
+    <string name="temperature_format">%1$s%2$s</string>
+    <string name="location_format">%1$s, %2$s</string>
+    <string name="unknown">unknown</string>
+    <!--
+        %1$s = first argument
+        %2$s = second argument
+        add more argument if need more
+    -->
+</resources>
