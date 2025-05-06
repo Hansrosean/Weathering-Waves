@@ -4,27 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
     android:orientation="vertical"
-    android:background="@color/light_gray"
     tools:context=".ui.AirQualityDialogFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Air Quality Detail"
         android:layout_gravity="center"
-        android:fontFamily="sans-serif-black"
-        android:textColor="@color/dark_blue"
-        android:textSize="25sp"/>
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/plustjakartasans_bold"
+        android:text="Air Quality Detail"
+        android:textAllCaps="true"
+        android:textColor="@color/light_gray"
+        android:textSize="25sp" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="30dp"
+        android:backgroundTint="@color/dark_blue"
         app:cardCornerRadius="15dp"
-        android:backgroundTint="@color/dark_blue">
+        app:strokeWidth="0dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,19 +46,20 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/plustjakartasans_bold"
             android:text="@string/unknown"
-            android:textColor="@color/blue"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textColor="@color/light_cyan_blue"
+            android:textSize="25sp" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="15dp"
+        android:backgroundTint="@color/dark_blue"
         app:cardCornerRadius="15dp"
-        android:backgroundTint="@color/dark_blue">
+        app:strokeWidth="0dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,20 +79,21 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/plustjakartasans_bold"
             android:text="@string/unknown"
-            android:textColor="@color/blue"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textColor="@color/light_cyan_blue"
+            android:textSize="25sp" />
 
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="15dp"
+        android:backgroundTint="@color/dark_blue"
         app:cardCornerRadius="15dp"
-        android:backgroundTint="@color/dark_blue">
+        app:strokeWidth="0dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -109,20 +113,21 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/plustjakartasans_bold"
             android:text="@string/unknown"
-            android:textColor="@color/blue"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textColor="@color/light_cyan_blue"
+            android:textSize="25sp" />
     </com.google.android.material.card.MaterialCardView>
 
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/dark_blue"
-        app:cardCornerRadius="15dp">
+        app:cardCornerRadius="15dp"
+        app:strokeWidth="0dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -142,19 +147,20 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/plustjakartasans_bold"
             android:text="@string/unknown"
-            android:textColor="@color/blue"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textColor="@color/light_cyan_blue"
+            android:textSize="25sp" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="15dp"
+        android:backgroundTint="@color/dark_blue"
         app:cardCornerRadius="15dp"
-        android:backgroundTint="@color/dark_blue">
+        app:strokeWidth="0dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -174,19 +180,20 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/plustjakartasans_bold"
             android:text="@string/unknown"
-            android:textColor="@color/blue"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textColor="@color/light_cyan_blue"
+            android:textSize="25sp" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="50dp"
         android:layout_marginTop="15dp"
+        android:backgroundTint="@color/dark_blue"
         app:cardCornerRadius="15dp"
-        android:backgroundTint="@color/dark_blue">
+        app:strokeWidth="0dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -206,19 +213,22 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/plustjakartasans_bold"
             android:text="@string/unknown"
-            android:textColor="@color/blue"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textColor="@color/light_cyan_blue"
+            android:textSize="25sp" />
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CLOSE"
-        android:textSize="17sp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/dark_blue"
-        android:layout_gravity="bottom|center"/>
+        android:backgroundTint="@color/pink"
+        app:fabCustomSize="60dp"
+        android:contentDescription="@string/close"
+        android:src="@drawable/baseline_close_24"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        app:tint="@color/light_gray"
+        android:layout_gravity="bottom|center" />
 </LinearLayout>

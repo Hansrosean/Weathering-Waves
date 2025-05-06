@@ -2,12 +2,26 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="light_gray">#f8f7fc</color>
+    <color name="light_gray">#F7F5FD</color>
     <color name="light_blue">#3CB7FF</color>
     <color name="green">#0EBC0E</color>
+    <color name="light_green">#34D234</color>
     <color name="pink">#FF2D6D</color>
-    <color name="gray">#A6A6A6</color>
+    <color name="red">#FF0000</color>
+    <color name="gray">#909090</color>
     <color name="blue">#1087F8</color>
     <color name="dark_blue">#2b286d</color>
     <color name="dark_indigo">#382d91</color>
+    <color name="lavender_gray">#a49ccf</color>
+    <color name="light_cyan_blue">#79DDFA</color>
+
+    <!-- for gradient color -->
+    <color name="dark_blue_gradient">#1c2546</color>
+    <color name="purple_gradient">#7e48a4</color>
+    <color name="light_purple_gradient">#d2cbfe</color>
+    <color name="soft_purple_gradient">#e7e5fd</color>
+
+    <color name="gradient_start">#2196F3</color> <!-- Biru terang -->
+    <color name="gradient_center">#1E88E5</color> <!-- Biru sedang -->
+    <color name="gradient_end">#1565C0</color> <!-- Biru gelap -->
 </resources>

@@ -5,16 +5,24 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray"
+    android:background="@drawable/background_gradient_dark"
     tools:context=".ui.LocationDetailActivity">
 
     <TextView
         android:id="@+id/tv_city_name_daily_forecast"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:textSize="22sp"
-        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:maxLines="2"
+        app:autoSizeMaxTextSize="25sp"
+        app:autoSizeMinTextSize="18sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="uniform"
+        android:fontFamily="@font/plustjakartasans_bold"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,29 +33,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
+        android:fontFamily="@font/plustjakartasans_bold"
+        android:textColor="@color/soft_purple_gradient"
+        android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_city_name_daily_forecast"
         app:layout_constraintStart_toStartOf="@+id/tv_city_name_daily_forecast"
         app:layout_constraintTop_toBottomOf="@id/tv_city_name_daily_forecast"
         tools:text="Min:8 C     Max:20 C" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="120dp" />
 
     <TextView
         android:id="@+id/tv_7_days_forecast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/plustjakartasans_bold"
         android:text="7-Days Forecasts"
+        android:textColor="@color/light_gray"
         android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_min_max_temperature" />
+        app:layout_constraintTop_toBottomOf="@id/guideline_top" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_7_day_forecasts"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="20dp"
         android:clipToPadding="false"
         android:paddingEnd="25dp"
         android:scrollIndicators="start"
@@ -55,36 +73,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_7_days_forecast"
-        tools:listitem="@layout/item_forecast_hourly" />
+        tools:itemCount="5"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_forecast_daily" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_air_quality"
         android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="25dp"
-        android:backgroundTint="@color/light_blue"
+        android:layout_marginTop="50dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_7_day_forecasts">
+        app:layout_constraintTop_toBottomOf="@id/rv_7_day_forecasts"
+        app:strokeWidth="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/background_gradient"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="17dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="20dp"
                 android:drawablePadding="5dp"
                 android:drawableTint="@color/white"
                 android:text="Air Quality"
+                android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 app:drawableStartCompat="@drawable/baseline_accessibility_new_24" />
 
             <TextView
@@ -92,16 +114,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="17dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/plustjakartasans_bold"
                 android:textColor="@color/white"
                 android:textSize="28sp"
-                android:textStyle="bold"
                 tools:text="Low Health Risk" />
 
             <View
-                android:layout_width="320dp"
+                android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_gravity="center"
+                android:layout_marginHorizontal="17dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/light_gray" />
 
@@ -110,21 +133,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="17dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="150dp"
+                android:layout_marginTop="21dp"
+                android:drawablePadding="50dp"
                 android:drawableTint="@color/white"
+                android:includeFontPadding="false"
                 android:text="See More"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:drawableEndCompat="@drawable/baseline_arrow_forward_ios_24" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <GridLayout
         android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         android:columnCount="2"
         android:orientation="horizontal"
         android:rowCount="1"
@@ -134,29 +158,31 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_time_detail"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_row="0"
             android:layout_column="0"
-            android:backgroundTint="@color/green"
             app:cardCornerRadius="15dp"
             app:cardElevation="0dp"
-            app:strokeWidth="1dp">
+            app:strokeColor="@color/light_cyan_blue"
+            app:strokeWidth="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/background_gradient"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="22dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:drawablePadding="5dp"
                     android:text="@string/sunrise"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="17sp"
+                    android:textSize="20sp"
                     app:drawableStartCompat="@drawable/baseline_brightness_high_24"
                     app:drawableTint="@color/white" />
 
@@ -167,9 +193,9 @@
                     android:layout_marginStart="22dp"
                     android:layout_marginTop="5dp"
                     android:drawablePadding="5dp"
+                    android:fontFamily="@font/plustjakartasans_bold"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textSize="23sp"
                     tools:text="05:00 AM" />
 
                 <TextView
@@ -179,8 +205,9 @@
                     android:layout_marginTop="17dp"
                     android:drawablePadding="5dp"
                     android:text="@string/sunset"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="17sp"
+                    android:textSize="20sp"
                     app:drawableStartCompat="@drawable/baseline_brightness_4_24"
                     app:drawableTint="@color/white" />
 
@@ -191,39 +218,40 @@
                     android:layout_marginStart="22dp"
                     android:layout_marginTop="5dp"
                     android:drawablePadding="5dp"
+                    android:fontFamily="@font/plustjakartasans_bold"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textSize="23sp"
                     tools:text="05:00 PM" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_uv_index"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_row="0"
             android:layout_column="1"
             android:layout_gravity="end"
-            android:backgroundTint="@color/green"
             app:cardCornerRadius="15dp"
             app:cardElevation="0dp"
-            app:strokeWidth="1dp">
+            app:strokeColor="@color/light_cyan_blue"
+            app:strokeWidth="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/background_gradient"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="22dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:drawablePadding="5dp"
                     android:text="@string/uv_index"
                     android:textColor="@color/white"
-                    android:textSize="17sp"
+                    android:textSize="20sp"
                     app:drawableStartCompat="@drawable/baseline_brightness_1_24"
                     app:drawableTint="@color/white" />
 
@@ -234,9 +262,9 @@
                     android:layout_marginStart="22dp"
                     android:layout_marginTop="15dp"
                     android:drawablePadding="5dp"
+                    android:fontFamily="@font/plustjakartasans_bold"
                     android:textColor="@color/white"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
+                    android:textSize="28sp"
                     tools:text="5" />
 
                 <TextView
@@ -246,9 +274,9 @@
                     android:layout_marginStart="22dp"
                     android:layout_marginTop="15dp"
                     android:drawablePadding="5dp"
+                    android:fontFamily="@font/plustjakartasans_bold"
                     android:textColor="@color/white"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
+                    android:textSize="28sp"
                     tools:text="Moderate" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

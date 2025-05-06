@@ -3,7 +3,6 @@ package com.app.weatheringwaves.ui
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +10,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -59,12 +57,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
-    var selectedLatLong = ""
-    var defaultLatLong = ""
+    private var selectedLatLong = ""
+    private var defaultLatLong = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -217,10 +215,11 @@ class MainActivity : AppCompatActivity() {
 //                        }
 //                         val result = filtered.take(5)
 
-                        // forecast hourly hari ini dan besok (apabila waktu melebihi 23.00)
+                        // forecast hourly today and tomorrow (if the time exceeds 23.00)
                         val tzId = responseBody.location.tzId
                         val timezone = TimeZone.getTimeZone(tzId)
 
+                        // get data up to two days
                         val allHours = responseBody.forecast.forecastday.flatMap { it.hour }
 
                         val calendarNow = Calendar.getInstance(timezone)
@@ -229,7 +228,7 @@ class MainActivity : AppCompatActivity() {
                         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
                         dateFormat.timeZone = timezone
 
-                        // filter dari waktu sekarang hingga +8 jam ke depan
+                        // filter frown now until next 8 hours
                         val filteredHours = allHours.filter { hour ->
                             val hourDate = dateFormat.parse(hour.time)
                             hourDate?.after(now) == true && hourDate.before(Date(now.time + 8 * 60 * 60 * 1000))

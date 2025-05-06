@@ -13,6 +13,8 @@
     <string name="temperature_format">%1$s%2$s</string>
     <string name="location_format">%1$s, %2$s</string>
     <string name="unknown">unknown</string>
+    <string name="choose_a_city">Choose a city</string>
+    <string name="close">Close</string>
     <!--
         %1$s = first argument
         %2$s = second argument

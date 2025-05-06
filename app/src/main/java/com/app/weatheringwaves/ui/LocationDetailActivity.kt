@@ -2,11 +2,14 @@ package com.app.weatheringwaves.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +24,7 @@ import androidx.lifecycle.lifecycleScope
 import com.app.weatheringwaves.BuildConfig
 import com.app.weatheringwaves.R
 import com.app.weatheringwaves.adapter.ForecastDailyAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -36,6 +40,15 @@ class LocationDetailActivity : AppCompatActivity() {
     private lateinit var tvUvIndex: TextView
     private lateinit var tvUvIndexDesc: TextView
     private lateinit var rv7DaysForecasts: RecyclerView
+
+    // alert dialog views
+    private lateinit var tvCo: TextView
+    private lateinit var tvNo2: TextView
+    private lateinit var tvO3: TextView
+    private lateinit var tvSo2: TextView
+    private lateinit var tvPm25: TextView
+    private lateinit var tvPm10: TextView
+    private lateinit var btnClose: FloatingActionButton
 
     private lateinit var forecastDailyList: List<ForecastdayItem>
 
@@ -71,31 +84,12 @@ class LocationDetailActivity : AppCompatActivity() {
         rv7DaysForecasts.layoutManager = linearLayoutManager
 
         tvSeeDetailAirQuality.setOnClickListener {
-            seeDetailAirQuality()
+            // seeDetailAirQuality() <- use this if want to show AirQualityDialogFragment
+            showDialogDetailAirQuality()
         }
-    }
 
-    private fun seeDetailAirQuality() {
-        // get location data from MainActivity
-        val defaultLatLong = intent.getStringExtra(DEFAULT_LOC_KEY)
-        val selectedLatLong = intent.getStringExtra(SELECTED_LOC_KEY)
-
-        // send location data to AirQualityDialogFragment
-        if (selectedLatLong.isNullOrEmpty()) {
-            val dialog = AirQualityDialogFragment()
-            val defaultLatLongBundle = Bundle()
-            defaultLatLongBundle.putString(DATA_KEY, defaultLatLong)
-
-            dialog.arguments = defaultLatLongBundle
-            dialog.show(supportFragmentManager, SEND_KEY)
-        } else {
-            val dialog = AirQualityDialogFragment()
-            val selectedLatLongBundle = Bundle()
-            selectedLatLongBundle.putString(DATA_KEY, selectedLatLong)
-
-            dialog.arguments = selectedLatLongBundle
-            dialog.show(supportFragmentManager, SEND_KEY)
-        }
+        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+        windowInsetsController.isAppearanceLightStatusBars = false
     }
 
     private fun setDetailLocationData() {
@@ -117,7 +111,7 @@ class LocationDetailActivity : AppCompatActivity() {
                 val client = ApiConfig.getApiService().getForecastData(
                     apiKey = BuildConfig.WEATHER_API_KEY,
                     location = location,
-                    days = "7",
+                    days = "3",
                     airQuality = "yes",
                     alerts = "no"
                 )
@@ -132,7 +126,11 @@ class LocationDetailActivity : AppCompatActivity() {
                                 // city name
                                 val locationName = responseBody.location.name
                                 val locationRegion = responseBody.location.region
-                                tvCityNameDailyForecast.text = getString(R.string.location_format, locationName, locationRegion)
+                                tvCityNameDailyForecast.text = getString(
+                                    R.string.location_format,
+                                    locationName,
+                                    locationRegion
+                                )
 
                                 // min max temperature
                                 val minTemperature =
@@ -146,7 +144,7 @@ class LocationDetailActivity : AppCompatActivity() {
 
                                 // air quality index
                                 val airQualityIndex =
-                                    responseBody.forecast.forecastday[0].day.airQuality.usEpaIndex
+                                    responseBody.current.airQuality.usEpaIndex
 
                                 lifecycleScope.launch {
                                     val aqiResult = withContext(Dispatchers.Default) {
@@ -165,12 +163,12 @@ class LocationDetailActivity : AppCompatActivity() {
 
                                 // sunrise
                                 val sunriseTime =
-                                    responseBody.forecast.forecastday[0].astro.sunrise.toString()
+                                    responseBody.forecast.forecastday[0].astro.sunrise
                                 tvSunrise.text = sunriseTime
 
                                 // sunset
                                 val sunsetTime =
-                                    responseBody.forecast.forecastday[0].astro.sunset.toString()
+                                    responseBody.forecast.forecastday[0].astro.sunset
                                 tvSunset.text = sunsetTime
 
                                 // uv index
@@ -196,7 +194,10 @@ class LocationDetailActivity : AppCompatActivity() {
                                 // forecast daily
                                 val getForecastDayList = responseBody.forecast.forecastday
                                 forecastDailyList = getForecastDayList
-                                forecastDailyAdapter = ForecastDailyAdapter(context = this@LocationDetailActivity, forecastDailyList = forecastDailyList)
+                                forecastDailyAdapter = ForecastDailyAdapter(
+                                    context = this@LocationDetailActivity,
+                                    forecastDailyList = forecastDailyList
+                                )
                                 rv7DaysForecasts.adapter = forecastDailyAdapter
                             }
                         }
@@ -207,7 +208,141 @@ class LocationDetailActivity : AppCompatActivity() {
                         t: Throwable
                     ) {
                         Log.e("LocationDetailActivity", "onFailure: ${t.message}", t)
-                        Toast.makeText(this@LocationDetailActivity, "Failed to load data. Please try again.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@LocationDetailActivity,
+                            "Failed to load data. Please try again.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                })
+            } catch (e: Exception) {
+                Log.e("error", "getDailyForecastData: ${e.message}")
+            }
+        }
+    }
+
+
+    private fun showDialogDetailAirQuality() {
+        val builder = AlertDialog.Builder(this@LocationDetailActivity)
+        val dialogView = layoutInflater.inflate(R.layout.fragment_air_quality_detail, null)
+
+        builder.setView(dialogView)
+
+        val dialog = builder.create()
+        dialog.show()
+        dialog.setCanceledOnTouchOutside(true)
+
+        tvCo = dialogView.findViewById(R.id.tv_co)
+        tvNo2 = dialogView.findViewById(R.id.tv_no2)
+        tvO3 = dialogView.findViewById(R.id.tv_o3)
+        tvSo2 = dialogView.findViewById(R.id.tv_so2)
+        tvPm25 = dialogView.findViewById(R.id.tv_pm25)
+        tvPm10 = dialogView.findViewById(R.id.tv_pm10)
+        btnClose = dialogView.findViewById(R.id.btn_close)
+
+        btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // Use this dialog to remove empty spaces below close button
+        val window = dialog.window
+        val layoutParams = window?.attributes
+        layoutParams?.width = WindowManager.LayoutParams.MATCH_PARENT
+        window?.attributes = layoutParams
+
+        seeDetailAirQuality(tvCo, tvNo2, tvO3, tvSo2, tvPm25, tvPm10)
+    }
+
+    private fun seeDetailAirQuality(
+        tvCo: TextView,
+        tvNo2: TextView,
+        tvO3: TextView,
+        tvSo2: TextView,
+        tvPm25: TextView,
+        tvPm10: TextView
+    ) {
+        // get location data from MainActivity
+        val defaultLatLong = intent.getStringExtra(DEFAULT_LOC_KEY)
+        val selectedLatLong = intent.getStringExtra(SELECTED_LOC_KEY)
+
+        // set location data
+        if (selectedLatLong.isNullOrEmpty()) {
+            getAqiData(defaultLatLong.toString(), tvCo, tvNo2, tvO3, tvSo2, tvPm25, tvPm10)
+        } else {
+            getAqiData(selectedLatLong.toString(), tvCo, tvNo2, tvO3, tvSo2, tvPm25, tvPm10)
+        }
+
+//        USE THIS CODE BELOW IF WANT TO USE AirQualityDialogFragment
+//
+//        // get location data from MainActivity
+//        val defaultLatLong = intent.getStringExtra(DEFAULT_LOC_KEY)
+//        val selectedLatLong = intent.getStringExtra(SELECTED_LOC_KEY)
+//
+//        // send location data to AirQualityDialogFragment
+//        if (selectedLatLong.isNullOrEmpty()) {
+//            val dialog = AirQualityDialogFragment()
+//            val defaultLatLongBundle = Bundle()
+//            defaultLatLongBundle.putString(DATA_KEY, defaultLatLong)
+//
+//            dialog.arguments = defaultLatLongBundle
+//            dialog.show(supportFragmentManager, SEND_KEY)
+//        } else {
+//            val dialog = AirQualityDialogFragment()
+//            val selectedLatLongBundle = Bundle()
+//            selectedLatLongBundle.putString(DATA_KEY, selectedLatLong)
+//
+//            dialog.arguments = selectedLatLongBundle
+//            dialog.show(supportFragmentManager, SEND_KEY)
+//        }
+    }
+
+    private fun getAqiData(
+        location: String,
+        tvCo: TextView,
+        tvNo2: TextView,
+        tvO3: TextView,
+        tvSo2: TextView,
+        tvPm25: TextView,
+        tvPm10: TextView
+    ) {
+        lifecycleScope.launch {
+            try {
+                val client = ApiConfig.getApiService().getForecastData(
+                    apiKey = BuildConfig.WEATHER_API_KEY,
+                    location = location,
+                    days = "1",
+                    airQuality = "yes",
+                    alerts = "no"
+                )
+                client.enqueue(object : Callback<ForecastResponse> {
+                    override fun onResponse(
+                        call: Call<ForecastResponse>,
+                        response: Response<ForecastResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val responseBody = response.body()
+                            if (responseBody != null) {
+                                tvCo.text = responseBody.current.airQuality.co.toString()
+                                tvNo2.text = responseBody.current.airQuality.no2.toString()
+                                tvO3.text = responseBody.current.airQuality.o3.toString()
+                                tvSo2.text = responseBody.current.airQuality.so2.toString()
+                                tvPm25.text = responseBody.current.airQuality.pm25.toString()
+                                tvPm10.text = responseBody.current.airQuality.pm10.toString()
+                            }
+                        }
+                    }
+
+                    override fun onFailure(
+                        call: Call<ForecastResponse>,
+                        t: Throwable
+                    ) {
+                        Log.e("AirQualityDialogFragment", "onFailure: ${t.message}", t)
+                        Toast.makeText(
+                            this@LocationDetailActivity,
+                            "Failed to load data. Please try again.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 })
@@ -220,7 +355,7 @@ class LocationDetailActivity : AppCompatActivity() {
     companion object {
         const val SELECTED_LOC_KEY = "1"
         const val DEFAULT_LOC_KEY = "0"
-        const val DATA_KEY = "100"
-        const val SEND_KEY = "300"
+//        const val DATA_KEY = "100"
+//        const val SEND_KEY = "300"
     }
 }

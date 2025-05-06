@@ -22,6 +22,11 @@ import retrofit2.Response
 
 class AirQualityDialogFragment : DialogFragment() {
 
+    /*
+    * THIS FRAGMENT IS UNUSED
+    * USE THIS IF WANT TO SHOW FULL SCREEN DIALOG
+    */
+
     private lateinit var tvCo: TextView
     private lateinit var tvNo2: TextView
     private lateinit var tvO3: TextView

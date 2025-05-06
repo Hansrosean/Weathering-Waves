@@ -5,30 +5,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.SearchLocationFragment"
-    android:background="@color/light_gray">
+    android:background="@drawable/background_gradient_dark">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Choose a city"
+        android:layout_marginTop="50dp"
+        android:text="@string/choose_a_city"
         android:layout_gravity="center"
-        android:fontFamily="sans-serif-black"
-        android:textColor="@color/dark_blue"
-        android:textSize="25sp"/>
+        android:fontFamily="@font/plustjakartasans_bold"
+        android:textColor="@color/light_gray"
+        android:textSize="27sp"/>
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/sv_location"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="55dp"
         android:layout_marginTop="30dp"
         android:layout_marginHorizontal="20dp"
-        android:background="@color/white"
-        android:queryBackground="@color/white"
+        android:background="@color/gradient_start"
+        android:queryBackground="@color/gradient_start"
         android:queryHint="Search city name"
         android:iconifiedByDefault="false"
         android:focusable="true"
-        android:textSize="17sp" />
+        android:textSize="18sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_location_search_result"
